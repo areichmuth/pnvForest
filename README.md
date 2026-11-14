@@ -6,15 +6,15 @@ You need to change the paths within the files according. Please stick to the ord
 Within the file *sourceFunctions.R* all background functions are included. Leave the structure of folders and scripts as it is.
 
 
-## Normalisation
-The model output by Reichmuth et al. 2025 show a zero-inflated beta distributions for the species occurrences. To aggregate the species, we need to normalise the occurrences and later create a dataframe for the following analysis. Download the data from [https://doi.org/10.48758/UFZ.18058](https://doi.org/10.48758/UFZ.18058) 
+## Preparing the data
+The model output by Reichmuth et al. 2025 show a zero-inflated beta distributions for the species occurrences. To aggregate the species, we need to normalise the occurrences and later create a dataframe for the following analysis. Download the data from [https://doi.org/10.48758/UFZ.18058](https://doi.org/10.48758/UFZ.18058). First the data will be normalised (*newMax.R*) and then dataframes will be created for further processing (*prepareDate.R*) 
 
 Run:
 * prepare/newMax.R
 * prepare/prepareData.R
 
 ## Emulation
-First, we emulate PNV formations in reference to Bohn et al. 2003 using an optimisation algorithm. Within this algorithm, each tree species that is described as a dominant or sub-dominant tree species within the formation by Bohn et al. 2005 and occurs within the model data by Reichmuth et al. 2025, is considered. For each of these species within the formation, the algorithm iteratively finds the best weight for the species occurrence probabilities to aggregate the mean over all considered species. This weighted mean of all considered species results an emulated formation. To evaluate each iteration of emulation, we apply a TSS maximisation using PNV data by Bohn et al. (2003) as reference. The algorithm returns the best weights per species within the formation as well as the TSS threshold from within the maximisation. The *applyOptim.R* algorithm applies the result from the optimisation as occurrence probability and binary maps. All is projected to the projection period as well by using the same weights.    
+First, we emulate PNV formations in reference to Bohn et al. 2003 using an optimisation algorithm (*optim.R*). Within this algorithm, each tree species that is described as a dominant or sub-dominant tree species within the formation by Bohn et al. 2005 and occurs within the model data by Reichmuth et al. 2025, is considered. For each of these species within the formation, the algorithm iteratively finds the best weight for the species occurrence probabilities to aggregate the mean over all considered species. This weighted mean of all considered species results an emulated formation. To evaluate each iteration of emulation, we apply a TSS maximisation using PNV data by Bohn et al. (2003) as reference. The algorithm returns the best weights per species within the formation as well as the TSS threshold from within the maximisation. The *applyOptim.R* algorithm applies the result from *optim.R* as occurrence probability and binary maps. All is projected to the projection period as well by using the same weights. The algorithm *optimValues.R* extracts the TSS values and threshold to a table.   
 
 
 * optimisation/optim.R - run ```bash orchestrateOptim.sh```
@@ -23,12 +23,12 @@ First, we emulate PNV formations in reference to Bohn et al. 2003 using an optim
 
 
 ## Analysis
-Then we extracted the proportion which emulated formations occur within the reference PNV extent. Here we return a map and the proportions.
+Then we aggregated the amount of binary formations per pixel to maps (*comparePnv.R*). We extracted the proportion into boxplots which emulated formations occur within the reference PNV extent (*evalPnvShp.R*).
 
 * analyse/comparePnv.R
 * analyse/evalPnvShp.R
 
-We extracted the amount of binarised formations per pixel for the reference and projection period to retrieve the change over time of emulated PNV formations. Here now we take the difference to retrieve the change over time. 
+We already aggregated the binary formations for the reference and projection period to retrieve the change over time for the emulated PNV formations. Here now we take the difference to retrieve the change over time. 
 
 * analyse/sumDiff.R
 
