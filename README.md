@@ -17,7 +17,7 @@ Run:
 First, we emulate PNV formations in reference to Bohn et al. 2003 using an optimisation algorithm. Within this algorithm, each tree species that is described as a dominant or sub-dominant tree species within the formation by Bohn et al. 2005 and occurrs within the model data by Reichmuth et al. 2025, is considered. For each of these species within the formation, the algorithm iteratively finds the best weight for the species occurrence probabilities to aggregate the mean over all considered species. This weighted mean of all considered species results an emulated formation. To evaluate each iteration of emulation, we apply a TSS maximisation using PNV data by Bohn et al. (2003) as reference. The algorithm returns the best weights per species within the formation as well as the TSS threshold from within the maximisation. The *applyOptim.R* algorithm applies the result from the optimisation as occurrence probability and binary maps. All is projected to the projection period as well by using the same weights.    
 
 
-* optimisation/optim.R - run '''bash orchestrateOptim.sh'''
+* optimisation/optim.R - run ```bash orchestrateOptim.sh``
 * optimisation/applyOptim.R
 * optimisation/optimValues.R
 
