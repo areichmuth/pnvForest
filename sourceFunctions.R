@@ -488,7 +488,7 @@ optimDE = function(i){
   domPerc = round((length(specTrueDom)*100)/length(primSpecList[[i]]), digits=2)
   sidePerc = round((length(specTrueSide)*100)/length(sideSpecList[[i]]), digits=2)
 
-  if (domPerc>=50 && sidePerc >= 30){
+  if (domPerc>=50 && sidePerc >= 40){
     ## Set ranges for weights
     len=length(specTrueDom)+length(specTrueSide)
     parm_min <- rep(0,len) #0.1
